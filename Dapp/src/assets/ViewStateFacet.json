@@ -1,0 +1,646 @@
+[
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "vaultId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getAssetVault",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "signatory",
+          "type": "address"
+        }
+      ],
+      "name": "getCursedBond",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getExpirationThreshold",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "signatory",
+          "type": "address"
+        }
+      ],
+      "name": "getFreeBond",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getGracePeriod",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getProtocolFeeBasePercentage",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        }
+      ],
+      "name": "getRecipientVaults",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "signatory",
+          "type": "address"
+        }
+      ],
+      "name": "getRewards",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "addresses",
+          "type": "address[]"
+        }
+      ],
+      "name": "getSignatoriesStatistics",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "successes",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "accusals",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "cleanups",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct LibTypes.SignatoryStatistics[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "signatory",
+          "type": "address"
+        }
+      ],
+      "name": "getSignatoryAccusalsCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "signatory",
+          "type": "address"
+        }
+      ],
+      "name": "getSignatoryCleanupsCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "signatory",
+          "type": "address"
+        }
+      ],
+      "name": "getSignatoryProfile",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "exists",
+              "type": "bool"
+            },
+            {
+              "internalType": "string",
+              "name": "peerId",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "minimumDiggingFee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "maximumRewrapInterval",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "freeBond",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "cursedBond",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct LibTypes.SignatoryProfile",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "getSignatoryProfileAddressAtIndex",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getSignatoryProfileAddresses",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "addresses",
+          "type": "address[]"
+        }
+      ],
+      "name": "getSignatoryProfiles",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "exists",
+              "type": "bool"
+            },
+            {
+              "internalType": "string",
+              "name": "peerId",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "minimumDiggingFee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "maximumRewrapInterval",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "freeBond",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "cursedBond",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct LibTypes.SignatoryProfile[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "signatory",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "vaultId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getSignatorySuccessOnVault",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "signatory",
+          "type": "address"
+        }
+      ],
+      "name": "getSignatorySuccessesCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "signatory",
+          "type": "address"
+        }
+      ],
+      "name": "getSignatoryVaults",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTotalProtocolFees",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "vaultId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getVault",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "enum LibTypes.VaultState",
+              "name": "state",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bool",
+              "name": "canBeTransferred",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint8",
+              "name": "minShards",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256",
+              "name": "resurrectionTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "maximumRewrapInterval",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string[]",
+              "name": "arweaveTxIds",
+              "type": "string[]"
+            },
+            {
+              "internalType": "address",
+              "name": "vaultOwner",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "recipientAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "address[]",
+              "name": "signatories",
+              "type": "address[]"
+            }
+          ],
+          "internalType": "struct LibTypes.Vault",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "vaultOwner",
+          "type": "address"
+        }
+      ],
+      "name": "getVaultOwnerAssetVaults",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "vaultOwner",
+          "type": "address"
+        }
+      ],
+      "name": "getVaultOwnerVaults",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "vaultId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "signatory",
+          "type": "address"
+        }
+      ],
+      "name": "getVaultSignatory",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "diggingFee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "diggingFeesPaid",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "unencryptedShardDoubleHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "unencryptedShard",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct LibTypes.SignatoryStorage",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "signatory",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "signatoryAccusalsIdentifier",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "signatory",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "signatoryCleanupsIdentifier",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "signatory",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "signatorySuccessesIdentifier",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
