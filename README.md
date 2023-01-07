@@ -1,4 +1,5 @@
-# ZLend DeFi-Lending-and-Borrowing DApp
+# ZLend 
+## DeFi Lending DApp
 DeFi Lending platform which lets you lend, borrow crypto assets and helps you earn some passive income as interest on your deposits.
 
 Depositors are rewarded with zLend tokens for depositing into the Lending Pool. Depositors will also be able to share from the interest made on the platforms from loans.
