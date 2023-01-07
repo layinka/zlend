@@ -28,7 +28,7 @@ import type {
   PromiseOrValue,
 } from "../common";
 
-export declare namespace ZLend {
+export declare namespace ZLend2 {
   export type TokenStruct = {
     tokenAddress: PromiseOrValue<string>;
     LTV: PromiseOrValue<BigNumberish>;
@@ -52,9 +52,8 @@ export declare namespace ZLend {
   };
 }
 
-export interface ZLendInterface extends utils.Interface {
+export interface ZLend2Interface extends utils.Interface {
   functions: {
-    "addTokenToPriceFeedMapping(address,address)": FunctionFragment;
     "addTokensForBorrowing(string,address,uint256,uint256,uint256)": FunctionFragment;
     "addTokensForLending(string,address,uint256,uint256,uint256)": FunctionFragment;
     "borrow(uint256,address)": FunctionFragment;
@@ -82,7 +81,8 @@ export interface ZLendInterface extends utils.Interface {
     "owner()": FunctionFragment;
     "payDebt(address,uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "tokenToPriceFeed(address)": FunctionFragment;
+    "tokenPriceFeed(address)": FunctionFragment;
+    "tokenPriceFeedDec(address)": FunctionFragment;
     "tokensBorrowed(uint256,address)": FunctionFragment;
     "tokensBorrowedAmount(address,address)": FunctionFragment;
     "tokensForBorrowing(uint256)": FunctionFragment;
@@ -90,13 +90,13 @@ export interface ZLendInterface extends utils.Interface {
     "tokensLent(uint256,address)": FunctionFragment;
     "tokensLentAmount(address,address)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "updateTokenPrice(address,uint256,uint256)": FunctionFragment;
     "withdraw(address,uint256)": FunctionFragment;
     "zLToken()": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "addTokenToPriceFeedMapping"
       | "addTokensForBorrowing"
       | "addTokensForLending"
       | "borrow"
@@ -124,7 +124,8 @@ export interface ZLendInterface extends utils.Interface {
       | "owner"
       | "payDebt"
       | "renounceOwnership"
-      | "tokenToPriceFeed"
+      | "tokenPriceFeed"
+      | "tokenPriceFeedDec"
       | "tokensBorrowed"
       | "tokensBorrowedAmount"
       | "tokensForBorrowing"
@@ -132,14 +133,11 @@ export interface ZLendInterface extends utils.Interface {
       | "tokensLent"
       | "tokensLentAmount"
       | "transferOwnership"
+      | "updateTokenPrice"
       | "withdraw"
       | "zLToken"
   ): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "addTokenToPriceFeedMapping",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>]
-  ): string;
   encodeFunctionData(
     functionFragment: "addTokensForBorrowing",
     values: [
@@ -263,7 +261,11 @@ export interface ZLendInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "tokenToPriceFeed",
+    functionFragment: "tokenPriceFeed",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "tokenPriceFeedDec",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
@@ -295,15 +297,19 @@ export interface ZLendInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "updateTokenPrice",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "withdraw",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(functionFragment: "zLToken", values?: undefined): string;
 
-  decodeFunctionResult(
-    functionFragment: "addTokenToPriceFeedMapping",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "addTokensForBorrowing",
     data: BytesLike
@@ -392,7 +398,11 @@ export interface ZLendInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "tokenToPriceFeed",
+    functionFragment: "tokenPriceFeed",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "tokenPriceFeedDec",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -418,6 +428,10 @@ export interface ZLendInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateTokenPrice",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
@@ -507,12 +521,12 @@ export type WithdrawEvent = TypedEvent<
 
 export type WithdrawEventFilter = TypedEventFilter<WithdrawEvent>;
 
-export interface ZLend extends BaseContract {
+export interface ZLend2 extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: ZLendInterface;
+  interface: ZLend2Interface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -534,12 +548,6 @@ export interface ZLend extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    addTokenToPriceFeedMapping(
-      tokenAddress: PromiseOrValue<string>,
-      tokenToUsdPriceFeed: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     addTokensForBorrowing(
       name: PromiseOrValue<string>,
       tokenAddress: PromiseOrValue<string>,
@@ -592,15 +600,15 @@ export interface ZLend extends BaseContract {
     getTokenFrom(
       tokenAddress: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<[ZLend.TokenStructOutput]>;
+    ): Promise<[ZLend2.TokenStructOutput]>;
 
     getTokensForBorrowingArray(
       overrides?: CallOverrides
-    ): Promise<[ZLend.TokenStructOutput[]]>;
+    ): Promise<[ZLend2.TokenStructOutput[]]>;
 
     getTokensForLendingArray(
       overrides?: CallOverrides
-    ): Promise<[ZLend.TokenStructOutput[]]>;
+    ): Promise<[ZLend2.TokenStructOutput[]]>;
 
     getTotalAmountBorrowedInDollars(
       user: PromiseOrValue<string>,
@@ -673,10 +681,15 @@ export interface ZLend extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    tokenToPriceFeed(
+    tokenPriceFeed(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<[string]>;
+    ): Promise<[BigNumber]>;
+
+    tokenPriceFeedDec(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     tokensBorrowed(
       arg0: PromiseOrValue<BigNumberish>,
@@ -733,6 +746,13 @@ export interface ZLend extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    updateTokenPrice(
+      tokenAddress: PromiseOrValue<string>,
+      usdPrice: PromiseOrValue<BigNumberish>,
+      decimal: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     withdraw(
       tokenAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
@@ -741,12 +761,6 @@ export interface ZLend extends BaseContract {
 
     zLToken(overrides?: CallOverrides): Promise<[string]>;
   };
-
-  addTokenToPriceFeedMapping(
-    tokenAddress: PromiseOrValue<string>,
-    tokenToUsdPriceFeed: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   addTokensForBorrowing(
     name: PromiseOrValue<string>,
@@ -800,15 +814,15 @@ export interface ZLend extends BaseContract {
   getTokenFrom(
     tokenAddress: PromiseOrValue<string>,
     overrides?: CallOverrides
-  ): Promise<ZLend.TokenStructOutput>;
+  ): Promise<ZLend2.TokenStructOutput>;
 
   getTokensForBorrowingArray(
     overrides?: CallOverrides
-  ): Promise<ZLend.TokenStructOutput[]>;
+  ): Promise<ZLend2.TokenStructOutput[]>;
 
   getTokensForLendingArray(
     overrides?: CallOverrides
-  ): Promise<ZLend.TokenStructOutput[]>;
+  ): Promise<ZLend2.TokenStructOutput[]>;
 
   getTotalAmountBorrowedInDollars(
     user: PromiseOrValue<string>,
@@ -881,10 +895,15 @@ export interface ZLend extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  tokenToPriceFeed(
+  tokenPriceFeed(
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
-  ): Promise<string>;
+  ): Promise<BigNumber>;
+
+  tokenPriceFeedDec(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   tokensBorrowed(
     arg0: PromiseOrValue<BigNumberish>,
@@ -941,6 +960,13 @@ export interface ZLend extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  updateTokenPrice(
+    tokenAddress: PromiseOrValue<string>,
+    usdPrice: PromiseOrValue<BigNumberish>,
+    decimal: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   withdraw(
     tokenAddress: PromiseOrValue<string>,
     amount: PromiseOrValue<BigNumberish>,
@@ -950,12 +976,6 @@ export interface ZLend extends BaseContract {
   zLToken(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    addTokenToPriceFeedMapping(
-      tokenAddress: PromiseOrValue<string>,
-      tokenToUsdPriceFeed: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     addTokensForBorrowing(
       name: PromiseOrValue<string>,
       tokenAddress: PromiseOrValue<string>,
@@ -1008,15 +1028,15 @@ export interface ZLend extends BaseContract {
     getTokenFrom(
       tokenAddress: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<ZLend.TokenStructOutput>;
+    ): Promise<ZLend2.TokenStructOutput>;
 
     getTokensForBorrowingArray(
       overrides?: CallOverrides
-    ): Promise<ZLend.TokenStructOutput[]>;
+    ): Promise<ZLend2.TokenStructOutput[]>;
 
     getTokensForLendingArray(
       overrides?: CallOverrides
-    ): Promise<ZLend.TokenStructOutput[]>;
+    ): Promise<ZLend2.TokenStructOutput[]>;
 
     getTotalAmountBorrowedInDollars(
       user: PromiseOrValue<string>,
@@ -1087,10 +1107,15 @@ export interface ZLend extends BaseContract {
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
-    tokenToPriceFeed(
+    tokenPriceFeed(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<string>;
+    ): Promise<BigNumber>;
+
+    tokenPriceFeedDec(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     tokensBorrowed(
       arg0: PromiseOrValue<BigNumberish>,
@@ -1144,6 +1169,13 @@ export interface ZLend extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    updateTokenPrice(
+      tokenAddress: PromiseOrValue<string>,
+      usdPrice: PromiseOrValue<BigNumberish>,
+      decimal: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1230,12 +1262,6 @@ export interface ZLend extends BaseContract {
   };
 
   estimateGas: {
-    addTokenToPriceFeedMapping(
-      tokenAddress: PromiseOrValue<string>,
-      tokenToUsdPriceFeed: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     addTokensForBorrowing(
       name: PromiseOrValue<string>,
       tokenAddress: PromiseOrValue<string>,
@@ -1365,7 +1391,12 @@ export interface ZLend extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    tokenToPriceFeed(
+    tokenPriceFeed(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    tokenPriceFeedDec(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1409,6 +1440,13 @@ export interface ZLend extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    updateTokenPrice(
+      tokenAddress: PromiseOrValue<string>,
+      usdPrice: PromiseOrValue<BigNumberish>,
+      decimal: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     withdraw(
       tokenAddress: PromiseOrValue<string>,
       amount: PromiseOrValue<BigNumberish>,
@@ -1419,12 +1457,6 @@ export interface ZLend extends BaseContract {
   };
 
   populateTransaction: {
-    addTokenToPriceFeedMapping(
-      tokenAddress: PromiseOrValue<string>,
-      tokenToUsdPriceFeed: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     addTokensForBorrowing(
       name: PromiseOrValue<string>,
       tokenAddress: PromiseOrValue<string>,
@@ -1560,7 +1592,12 @@ export interface ZLend extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    tokenToPriceFeed(
+    tokenPriceFeed(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    tokenPriceFeedDec(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1601,6 +1638,13 @@ export interface ZLend extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    updateTokenPrice(
+      tokenAddress: PromiseOrValue<string>,
+      usdPrice: PromiseOrValue<BigNumberish>,
+      decimal: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

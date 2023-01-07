@@ -26,34 +26,36 @@ const ERC20AbiJSON = require('../../assets/ERC20.json');
 
 export const normalizeToken = async (provider, contract, currentToken, account) => {
   const fromWei = (amount: BigNumberish) => {
-    return ethers.utils.formatUnits(amount, 18);
-    // try{
-    //   return ethers.utils.formatUnits(amount, 18);
-    //   // return BigNumber.from(amount.toString()).div(10 ** 18).toString();
-    // }catch{
-    //   console.error('error fromweing ', amount)
-    //   return '0';
-    // }
+    
+    try{
+      return ethers.utils.formatUnits(amount, 18);
+    }catch{
+      console.error('error fromweing ', amount)
+      return '0';
+    }
   };
   
   
 
   const tokenInst = new ethers.Contract(currentToken.tokenAddress, ERC20AbiJSON.abi, provider);
+  if(!tokenInst){
+    return undefined;
+  }
 
   const decimals = await tokenInst.decimals();
 
   const walletBalance = await tokenInst.balanceOf(account);
-
+  
   const totalSuppliedInContract = await contract.getTotalTokenSupplied(currentToken.tokenAddress);
   const totalBorrowedInContract = await contract.getTotalTokenBorrowed(currentToken.tokenAddress);
   
-
+  
   let utilizationRate =ethers.constants.Zero;
   if(  !totalSuppliedInContract.isZero()){
     utilizationRate = totalBorrowedInContract.mul(100).div(totalSuppliedInContract).toString();
 
   }
-
+  
   const userTokenBorrowedAmount = await contract.tokensBorrowedAmount(currentToken.tokenAddress, account);
   
   const userTokenLentAmount = await contract.tokensLentAmount(currentToken.tokenAddress, account);
@@ -61,7 +63,7 @@ export const normalizeToken = async (provider, contract, currentToken, account) 
   const userTotalAmountAvailableToWithdrawInDollars = await contract.getTokenAvailableToWithdraw(account);
   
   const userTotalAmountAvailableForBorrowInDollars = await contract.getUserTotalAmountAvailableForBorrowInDollars(account);
-
+  
   const walletBalanceInDollars = await contract.getAmountInDollars(walletBalance, currentToken.tokenAddress);
   
   const totalSuppliedInContractInDollars = await contract.getAmountInDollars(totalSuppliedInContract, currentToken.tokenAddress);
@@ -77,10 +79,13 @@ export const normalizeToken = async (provider, contract, currentToken, account) 
   const availableAmountInContractInDollars = await contract.getAmountInDollars(availableAmountInContract, currentToken.tokenAddress);
   
   const result = await contract.oneTokenEqualsHowManyDollars(currentToken.tokenAddress);
-  const price = result[0];
-  const decimal = result[1];
   
-  const oneTokenToDollar = BigNumber.from(`${price}`).div(10 ** decimal).toString();
+  const price = result[0];
+  const decimal = +ethers.utils.formatUnits(result[1], 0);
+
+  
+  const oneTokenToDollar = ethers.utils.parseUnits(`${price}`).div((10 ** decimal).toString() ).toString();
+  // const oneTokenToDollar = BigNumber.from(`${price}`).div(10 ** decimal).toString();
   
   return {
     name: currentToken.name,

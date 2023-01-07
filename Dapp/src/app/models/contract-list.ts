@@ -2,10 +2,10 @@
 export interface ContractListArray {
     [index: number]: {
         chainId: number,
-        campaignList: string,
+        campaignList?: string,
         zLend?: string,
         zLendTokenAddress?: string,
-        routers: {name: string,address: string}[],
+        routers?: {name: string,address: string}[],
         tokenFactory?: string,
         tokenMintingFees?: {
             type: number,
@@ -42,23 +42,34 @@ const contractList: ContractListArray =  {
     31337: {// Hardhat test
         chainId: 31337,
         campaignList: '0x998abeb3E57409262aE5b751f60747921B33613E', 
-        zLend: '0xc0Bb1650A8eA5dDF81998f17B5319afD656f4c11', 
-        zLendTokenAddress: '0x313F922BE1649cEc058EC0f076664500c78bdc0b',      
-        routers:[
-            {
-                name: 'ZSwap',
-                address: '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9' //'0xb2869F895FC24790e81EF05a3AeF0F23897eC33b'
-            }
-        ],
-        tokenFactory: '0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0',
-        tokenMintingFees: [
-            {
-                type: 0,
-                fee: '0.001',
-                tokenPercent: 2
-            }
-        ]
+        zLend: '0x1eE9906e6AB8c53655c875119a396584cfe8FaaF', 
+        zLendTokenAddress: '0xAA2a95A342b774512c64799597bD75389e7d3C7a',      
+        
     }, 
+    137: {//Polygon mainnet
+        chainId: 137,
+        zLend: '0x1eE9906e6AB8c53655c875119a396584cfe8FaaF', 
+        zLendTokenAddress: '0xAA2a95A342b774512c64799597bD75389e7d3C7a', 
+    },
+    80001: { //Polygon mumbai
+        chainId: 80001,
+        zLend: '0x932102Bc1916f9d74E271dB6685aba0276f112F2', 
+        zLendTokenAddress: '0xED2E8410ECd1e71dDd0d9E045dc8ADA7C4509278', 
+    },
+
+    1001: {//Klaytyn testnet
+        chainId: 80001,
+        zLend: '0xE3cB58467250bd4178d737A87B87dc7AE00Dad62', 
+        zLendTokenAddress: '0x9ED133F814534B89c530909b9EfBAf226e6C9A4f', 
+    },
+
+    51: { // Apothem - XDC testnet
+        chainId: 51,
+        zLend: '0x3FCa62e61909455186BeaB7C9647bC66472e3bEe', 
+        zLendTokenAddress: '0xE7B1D4a5264d5984d1f06F559aA0B712222275CC', 
+    },
+
+    
     82: {// Meter
         chainId: 83,
         campaignList: '0xc4cc045f934f8bD03A333fCEd331fBf8D26d9931',        

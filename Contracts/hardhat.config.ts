@@ -63,9 +63,12 @@ const config: HardhatUserConfig = {
    networks: {
 		hardhat: {
 			// allowUnlimitedContractSize: false,
-			 forking: {
-				url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_KEY}`,
-				blockNumber: 15888727
+			chainId: 31337,
+			forking: {
+				// url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_KEY}`,
+				url: 'https://matic-mainnet-archive-rpc.bwarelabs.com',
+				//blockNumber: 15888727,// Eth Mainnet
+				blockNumber: 37225566 //polygon
 			}
 			// mining: {
 			//   auto: false,
@@ -77,10 +80,44 @@ const config: HardhatUserConfig = {
 		},
 		ropsten: {
 			url: process.env.ROPSTEN_URL || "",
-			accounts:
-				process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY, process.env.PRIVATE_KEY_2] : [],
-			},
-			auroratest: {
+			accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY, process.env.PRIVATE_KEY_2] : [],
+		},
+		mumbai: {
+			url: "https://rpc-mumbai.maticvigil.com",
+			accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY, process.env.PRIVATE_KEY_2] : [],
+			chainId: 80001,
+		},
+		matic: {
+			// Infura
+			// url: `https://polygon-mainnet.infura.io/v3/${infuraId}`,
+			url: "https://rpc-mainnet.maticvigil.com",
+			accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY, process.env.PRIVATE_KEY_2] : [],
+			chainId: 137
+		},
+
+		klaytyn_t: {
+			url: "https://api.baobab.klaytn.net:8651",
+			accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY, process.env.PRIVATE_KEY_2] : [],
+			chainId: 1001
+		},
+		klaytyn: {
+			url: " https://public-node-api.klaytnapi.com/v1/cypress",
+			accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY, process.env.PRIVATE_KEY_2] : [],
+			chainId: 8217
+		},
+
+		xinfin: {
+			url: "https://erpc.xinfin.network",
+			accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY, process.env.PRIVATE_KEY_2] : [],
+			chainId: 50
+		},
+		apothem: {
+			url: "https://erpc.apothem.network",
+			accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY, process.env.PRIVATE_KEY_2] : [],
+			chainId: 51
+		},
+		
+		auroratest: {
 			url: 'https://testnet.aurora.dev/',
 			chainId: 1313161555,
 			accounts:['0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80'] ,

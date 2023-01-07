@@ -5,6 +5,7 @@ import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from './icons/icon-subset';
 import { Title } from '@angular/platform-browser';
 import { Web3Service } from './services/web3.service';
+import { ethers } from 'ethers';
 
 
 
@@ -34,6 +35,14 @@ export class AppComponent implements OnInit {
         return;
       }
     });
+
+    // try{
+    // const oneTokenToDollar = ethers.utils.parseUnits(`1000000000000000000`).div((10 ** 18).toString()).toString();
+    // // const oneTokenToDollar = BigNumber.from(`${price}`).div(10 ** decimal).toString();
+    // console.log('result2:', oneTokenToDollar);
+    // }catch(err){
+    //   console.error('Error load app: ',err)
+    // }
   }
 
   // async connect (){

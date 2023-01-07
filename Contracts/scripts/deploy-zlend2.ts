@@ -26,7 +26,7 @@ async function main() {
 	console.log('chainId:  ', chainId );
   // chainId = 31337;
   
-  let zLendArtifact = await ethers.getContractFactory("zLend");
+  let zLendArtifact = await ethers.getContractFactory("zLend2");
   let zLendTokenArtifact = await ethers.getContractFactory("zLendToken");
   const MockV3AggregatorArtifact = await ethers.getContractFactory('MockV3Aggregator')
   
@@ -57,7 +57,8 @@ async function main() {
   for(const token of tokenDetails[chainId]){
     const tAddr = chainId==31337 ? await getTokenAddress(chainId, token.name ) : await getNewTokenAddress(chainId, token.name );
     console.log('Adding token ',  token.name, ' with address ', tAddr, ' and feed address ',  token.feed_address)
-    const tx = await zLend.addTokenToPriceFeedMapping(tAddr, token.feed_address);
+    // const tx = await zLend.updateTokenPrice(tAddr, ethers.utils.parseUnits(token.toUsd.toFixed(2), 0));
+    const tx = await zLend.updateTokenPrice(tAddr, ethers.utils.parseUnits(token.toUsd.toString(), token.decimal), token.decimal.toFixed(0) );
     await tx.wait();
 
     const tx2 = await zLend.addTokensForLending(token.name, tAddr, token.LTV, token.borrow_stable_rate, token.interest_rate);

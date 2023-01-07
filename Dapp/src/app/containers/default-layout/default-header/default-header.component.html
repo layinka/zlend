@@ -28,22 +28,36 @@
       </c-nav-item>
     </c-header-nav> -->
 
-    <select aria-label="Network" cSelect class="my-2 me-2 w-auto" [ngModel]="selectedNetwork" sizing="sm"  (ngModelChange)="onSwitchNetwork($event)" > 
+    <!-- <select aria-label="Network" cSelect class="my-2 me-2 w-auto" [ngModel]="selectedNetwork" sizing="sm"  (ngModelChange)="onSwitchNetwork($event)" > 
       <option value="">Choose Network</option>
       <option *ngFor="let network of networkList" [value]="network.chainId">
         {{network.name}}
       </option>
       
-    </select>
-    <button *ngIf="!web3Service.provider" class="btn btn-secondary btn-sm" (click)="connect()">Connect</button>
-    <div *ngIf="web3Service.provider" class="card card-success border">
-      <div class="card-body" >
-        <span *ngFor="let acct of web3Service.accounts$ | async" >
-            {{acct}}
-        </span>
+    </select> -->
 
-        <!-- <button  class="btn btn-danger btn-lg" (click)="disconnect()">Disconnect</button> -->
-      </div>
+    <div class="d-flex justify-content-end">
+        <div *ngIf="selectedNetwork" class="card card-success bg-light text-success border me-3">
+          <div class="card-body" >
+          {{selectedNetwork?.name}}
+          </div>
+        </div>
+
+        <button *ngIf="!web3Service.provider" class="btn btn-secondary btn-lg" (click)="connect()">Connect</button>
+
+        <div *ngIf="web3Service.provider" class="card card-success bg-light text-info border px-1">
+          <div class="card-body" >
+            <!-- <span *ngFor="let acct of web3Service.accounts$ | async" >
+                {{acct}}
+            </span> -->
+
+            <span>
+                {{displayAddressOrDomain}}
+            </span>
+
+            <!-- <button  class="btn btn-danger btn-lg" (click)="disconnect()">Disconnect</button> -->
+          </div>
+        </div>
     </div>
     <!-- <c-header-nav class="d-none d-lg-flex">
       <c-nav-item>

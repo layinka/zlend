@@ -5,7 +5,7 @@ import "./LendingHelper.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "hardhat/console.sol";
 
-contract zLend is Ownable, ReentrancyGuard {
+contract zLend2 is Ownable, ReentrancyGuard {
     using LendingHelper for address;
     using SafeERC20 for IERC20;
 
@@ -20,7 +20,9 @@ contract zLend is Ownable, ReentrancyGuard {
     mapping(uint256 => mapping(address => address)) public tokensLent;
     mapping(uint256 => mapping(address => address)) public tokensBorrowed;
 
-    mapping(address => address) public tokenToPriceFeed;
+    // mapping(address => address) public tokenToPriceFeed;
+    mapping(address => uint256) public tokenPriceFeed;
+    mapping(address => uint256) public tokenPriceFeedDec;
 
     event Withdraw(
         address sender,
@@ -99,8 +101,13 @@ contract zLend is Ownable, ReentrancyGuard {
         }
     }
 
-    function addTokenToPriceFeedMapping(address tokenAddress, address tokenToUsdPriceFeed) external onlyOwner {
-        tokenToPriceFeed[tokenAddress] = tokenToUsdPriceFeed;
+    // function addTokenToPriceFeedMapping(address tokenAddress, address tokenToUsdPriceFeed) external onlyOwner {
+    //     tokenToPriceFeed[tokenAddress] = tokenToUsdPriceFeed;
+    // }
+
+    function updateTokenPrice(address tokenAddress, uint usdPrice, uint decimal) external onlyOwner {
+        tokenPriceFeed[tokenAddress] = usdPrice;
+        tokenPriceFeedDec[tokenAddress] = decimal;
     }
 
     function getLendersArray() public view returns (address[] memory) {
@@ -426,17 +433,11 @@ contract zLend is Ownable, ReentrancyGuard {
         }
 
       function oneTokenEqualsHowManyDollars(address tokenAddress) public view returns (uint256, uint256){
-            address tokenToUsd = tokenToPriceFeed[tokenAddress];
-            console.log('tokenAddress: ', tokenAddress);
-            console.log('tokenToUsd: ', tokenToUsd);
-            console.log('------');
-            AggregatorV3Interface priceFeed = AggregatorV3Interface(tokenToUsd);
+            uint price = tokenPriceFeed[tokenAddress];
 
-            (, int256 price, , , ) = priceFeed.latestRoundData();
-
-            uint256 decimals = priceFeed.decimals();
-
-            return (uint256(price), decimals);
+            uint decimal = tokenPriceFeedDec[tokenAddress];
+            
+            return (price, decimal);
         }
 
        function updateUserTokensBorrowedOrLent(

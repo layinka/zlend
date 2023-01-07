@@ -75,6 +75,22 @@ const cList =  {
     "polygont": {
         chainId: 80001,
         creationFee: 0.001
+    },
+    "klaytyn": {
+        chainId: 8217,
+        creationFee: 10
+    }, 
+    "klaytynt": {
+        chainId: 1001,
+        creationFee: 0.001
+    },
+    "xinfin": {
+        chainId: 50,
+        creationFee: 10
+    }, 
+    "xinfint": {
+        chainId: 51,
+        creationFee: 0.001
     }
     
 };

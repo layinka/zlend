@@ -64,6 +64,7 @@ import { YourDepositsComponent } from './components/your-deposits/your-deposits.
 import { DepositAssetsComponent } from './components/deposit-assets/deposit-assets.component';
 import { AssetDetailsComponent } from './components/asset-details/asset-details.component';
 import { BorrowAssetsComponent } from './components/borrow-assets/borrow-assets.component';
+import { ZlendBalanceComponent } from './components/zlend-balance/zlend-balance.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -84,7 +85,8 @@ const APP_CONTAINERS = [
     YourDepositsComponent,
     DepositAssetsComponent,
     AssetDetailsComponent,
-    BorrowAssetsComponent
+    BorrowAssetsComponent,
+    ZlendBalanceComponent
   ],
   imports: [
     BrowserModule,

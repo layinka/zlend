@@ -1,35 +1,35 @@
 <c-toaster class="p-3" position="fixed" [placement]="placement"></c-toaster>
 
 
-<div class="card" >
+<div class="card bg-primary text-white" >
     <div class="card-header">
         <h3>Your Deposits</h3>
         Balance : ${{(deposits?.balance ?? "0") | number: '1.2-2'}}
     </div>
-    <div class="card-body ">
+    <div class="card-body text-white">
         <span *ngIf="!deposits">Loading ...</span>
         <table *ngIf="deposits" class="table table-striped">
             <thead>
               <tr>
-                <th scope="col" class="px-4 font-semibold">
+                <th scope="col" class="px-4 font-semibold text-white-200">
                   Assets
                 </th>
-                <th scope="col" class="px-4 py-2 font-semibold">
+                <th scope="col" class="px-4 py-2 font-semibold text-white-200">
                   Balance
                 </th>
-                <th scope="col" class="px-4 py-2 font-semibold">
+                <th scope="col" class="px-4 py-2 font-semibold text-white-200">
                   APY
                 </th>
-                <th scope="col" class="px-4 py-2 font-semibold">
+                <th scope="col" class="px-4 py-2 font-semibold text-white-200">
                   Collateral
                 </th>
-                <th scope="col" class="px-4 py-2 font-semibold"></th>
+                <th scope="col" class="px-4 py-2 font-semibold text-white-200"></th>
               </tr>
             </thead>
 
             <tbody>
                 <tr scope="row" *ngIf="deposits.deposits.length<1">
-                    <td colspan="5" class="text-center">
+                    <td colspan="5" class="text-center text-white-200">
                         No Deposits yet!
                     </td>
                 </tr>
@@ -37,12 +37,12 @@
                     <th class="border-t-0 px-4 border align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                         <div class="flex items-center">
                           <img [src]="'/assets/token-logos/' + token.name.toLowerCase() + '.png'" class="img-fluid" alt="coin image" style="width:80px"  />
-                          <div class="ml-2 text-gray-800">{{token.name}}</div>
+                          <div class="ml-2 text-white">{{token.name}}</div>
                         </div>
                     </th>
                     <td class="border-t-0 px-4 border align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        <div class="text-base font-medium text-gray-800">{{token.userTokenLentAmount.amount | number: '1.2-4'}}</div>
-                        <div class="text-sm text-gray-500">(${{token.userTokenLentAmount.inDollars| number: '1.2-2'}})</div>
+                        <div class="text-base font-medium text-white">{{token.userTokenLentAmount.amount | number: '1.2-4'}}</div>
+                        <div class="text-sm text-white">(${{token.userTokenLentAmount.inDollars| number: '1.2-2'}})</div>
                         
                     </td>
                     <td class="border-t-0 px-4 border  align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -52,7 +52,7 @@
                     <div class="text-green-700 text-lg font-large"> &#10004; </div>
                     </td>
                     <td class="border-t-0 px-4 border align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        <button (click)="openDepositModal(token)" class="btn btn-primary m-2 p-2">Deposit</button>
+                        <button (click)="openDepositModal(token)" class="btn btn-success m-2 p-2">Deposit</button>
 
                         <button (click)="openWithdrawModal(token)" class="btn btn-danger m-2 p-2">Withdraw</button>
                     </td>
@@ -72,7 +72,7 @@
 
 <c-modal id="depositModal" [visible]="depositCoinModalVisible" >
     <c-modal-header>
-      <h5 cModalTitle>Deposit <span class="ml-2 text-gray-800">{{selectedToken?.name??''}}</span> </h5>
+      <h5 cModalTitle>Deposit <span class="ml-2 text-white">{{selectedToken?.name??''}}</span> </h5>
       <button (click)="closeDepositModal()" cButtonClose>x</button>
     </c-modal-header>
   
@@ -123,7 +123,7 @@
 
 <c-modal  [visible]="withdrawModalVisible" >
     <c-modal-header>
-      <h5 cModalTitle>Withdraw <span class="ml-2 text-gray-800">{{selectedToken?.name??''}}</span> </h5>
+      <h5 cModalTitle>Withdraw <span class="ml-2 text-white">{{selectedToken?.name??''}}</span> </h5>
       <button (click)="closeWithdrawModal()" cButtonClose>x</button>
     </c-modal-header>
   

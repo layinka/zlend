@@ -21,6 +21,9 @@
 	            <th scope="col" class="px-4 py-2 font-semibold">
 	                APY (Stable)
 	            </th>
+                <th scope="col" class="px-4 py-2 font-semibold">
+                    LTV 
+                </th>
 	              
 	            <th scope="col" class="px-4 py-2 font-semibold"></th>
               </tr>
@@ -45,7 +48,11 @@
                         <div class="text-sm text-gray-500">(${{getAvailableStats(token).actualAvailableInDollars | number: '1.2-2'}})</div>
                     </td>
                     <td class="border-t-0 px-4 border  align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        <div class="text-base">{{ (token.borrowAPYRate * 100) | number: '1.2-2'}}%</div>
+                        <div class="text-base">{{ (token.borrowAPYRate * 100) | number: '1.2-2'}}%</div>                       
+                    </td>
+                    <td class="border-t-0 px-4 border  align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        
+                        <div class="text-base">{{ (token.LTV * 100) | number: '1.2-2'}}%</div>                        
                     </td>
                     
                     <td class="border-t-0 px-4 border align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">

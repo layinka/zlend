@@ -73,14 +73,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC165__factory>;
     getContractFactory(
-      name: "IERC20",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IERC20__factory>;
-    getContractFactory(
-      name: "LendingPool",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.LendingPool__factory>;
-    getContractFactory(
       name: "Lock",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Lock__factory>;
@@ -92,10 +84,6 @@ declare module "hardhat/types/runtime" {
       name: "NFTToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.NFTToken__factory>;
-    getContractFactory(
-      name: "Test",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Test__factory>;
     getContractFactory(
       name: "Token",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -185,16 +173,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IERC165>;
     getContractAt(
-      name: "IERC20",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IERC20>;
-    getContractAt(
-      name: "LendingPool",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.LendingPool>;
-    getContractAt(
       name: "Lock",
       address: string,
       signer?: ethers.Signer
@@ -209,11 +187,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.NFTToken>;
-    getContractAt(
-      name: "Test",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.Test>;
     getContractAt(
       name: "Token",
       address: string,

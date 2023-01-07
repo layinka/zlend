@@ -10,9 +10,13 @@ import { BigNumber , constants, ethers, utils } from 'ethers';
 import {BehaviorEventEmitter} from '../utils/BehaviorEventEmitter';
 import { getSupportedChainById, getSupportedChainByChain } from '../models/supported-chains';
 import { ZLend, ZLend__factory } from '../typechain-types';
-const ERC20AbiJSON = require('../../assets/ERC20.json');
-const CampaignListAbi = require('../../assets/CampaignList.json');
+import * as UAuthWeb3Modal from '@uauth/web3modal'
+import UAuthSPA from '@uauth/js'
+import UAuth from '@uauth/js'
 import {normalizeToken} from '../utils/normalize';
+const ERC20AbiJSON = require('../../assets/ERC20.json');
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +39,17 @@ export class Web3Service {
 
   infuraId = '8043bb2cf99347b1bfadfb233c5325c0';
 
+  uauth:  UAuth;
+
   constructor() {
+
+    // These options are used to construct the UAuthSPA instance.
+    const uauthOptions = {
+      clientID: "c50ea613-3d38-4526-a677-13480acc6a18",
+      redirectUri: "http://localhost:3000",
+      scope: "openid wallet"
+    }
+
 
     const providerOptions = {
       coinbasewallet: {
@@ -90,6 +104,25 @@ export class Web3Service {
         },
         package: null
       },
+
+      // Currently the package isn't inside the web3modal library. For now,
+      // users must use this libary to create a custom web3modal provider.
+
+      // All custom `web3modal` providers must be registered using the "custom-"
+      // prefix.
+      'custom-uauth': {
+        // The UI Assets
+        display: UAuthWeb3Modal.display,
+
+        // The Connector
+        connector: UAuthWeb3Modal.connector,
+
+        // The SPA libary
+        package: UAuthSPA,
+
+        // The SPA libary options
+        options: uauthOptions,
+      },
     };
 
     this.web3Modal = new Web3Modal({
@@ -105,6 +138,10 @@ export class Web3Service {
       }
     });
 
+    // Register the web3modal so the connector has access to it.
+    UAuthWeb3Modal.registerWeb3Modal(this.web3Modal)
+
+    this.uauth = new UAuth(uauthOptions);
 
     const cachedProvider =   window.localStorage.getItem('WEB3_CONNECT_CACHED_PROVIDER');
     if (cachedProvider) {
@@ -206,6 +243,9 @@ export class Web3Service {
     if(this.provider.close) {
       await this.provider.close();
 
+      if (this.web3Modal.cachedProvider === 'custom-uauth') {
+        await this.uauth.logout()
+      }
       // If the cached provider is not cleared,
       // WalletConnect will default to the existing session
       // and does not allow to re-scan the QR code with a new wallet.
@@ -218,6 +258,16 @@ export class Web3Service {
 
     this._accountsObservable.next([]);
     this.onConnectChange.emit(false);
+  }
+
+  public async getDisplayAccountOrDomain(){
+    if (this.web3Modal.cachedProvider === 'custom-uauth') {
+      const user = await this.uauth.user();
+      if(!user){
+        return user.sub??'';
+      }
+    }
+    return this.accounts[0]??'';
   }
 
   async switchNetwork(networkInfo: {

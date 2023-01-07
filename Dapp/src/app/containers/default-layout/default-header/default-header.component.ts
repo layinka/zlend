@@ -17,7 +17,9 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
 
   @Input() sidebarId: string = "sidebar";
   networkList = getSupportedChains();
-  selectedNetwork: any=0x61; 
+  selectedNetwork: any; 
+
+  displayAddressOrDomain : string ='';
 
   web3ServiceConnect$: Subscription|undefined;
 
@@ -38,7 +40,8 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
     
     this.web3ServiceConnect$ = this.web3Service.onConnectChange.subscribe(async (connected)=>{
       if(connected){
-        this.selectedNetwork = await this.web3Service.getCurrentChainId();    
+        this.selectedNetwork =  await this.web3Service.getCurrentChain(); // = await this.web3Service.getCurrentChainId();
+        this.displayAddressOrDomain=await this.web3Service.getDisplayAccountOrDomain();  
       }else{
         // this.selectedNetwork = undefined;
       } 

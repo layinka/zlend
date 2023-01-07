@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Web3Service } from 'src/app/services/web3.service';
 import { ZLend, ZLend__factory } from 'src/app/typechain-types';
 import contractList from '../../models/contract-list';
+import {Contract, ethers, utils} from 'ethers';
 
 // const ZLendAbi = require('../../../../assets/zlend.json');
 
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   zLendContract: ZLend|undefined;
 
-  balance :any ;
+  zlendBalance :any ;
   deposits: any;
   loans: any;
   
@@ -57,6 +58,8 @@ export class HomeComponent implements OnInit {
         this.deposits = await this.web3Service.getCurrentUsersDeposit(this.zLendContract);
         
         this.loans = await this.web3Service.getCurrentUsersLoans(this.zLendContract);
+
+        this.zlendBalance= ethers.utils.formatUnits(await this.web3Service.getERC20Balance(contractList[this.currentChainId].zLendTokenAddress, this.web3Service.accounts[0] ) );
                 
       }
 
